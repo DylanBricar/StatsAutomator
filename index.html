@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Statistiques</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="icon" href="img/favicon.ico">
+    <script src="libs/jquery.min.js"></script>
+    <script src="js/const.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/binomial.js"></script>
+    <script src="js/normal.js"></script>
+    <script src="js/regression.js"></script>
+    <script src="js/inference.js"></script>
+    <script src="js/processing.js"></script>
+</head>
+
+<body>
+    <!-------------------------------------
+    --------------- INFORMATIONS
+    -------------------------------------->
+
+    <div class="separator intro">
+        <h1 class="intro"><span id="removeIntro">X</span> Informations diverses</h1>
+        <h2>Utilité du site et license</h2>
+        <hr class="intro">
+        <p>Ce site a été conçu tout au long d'une année scolaire afin d'assurer la compréhension de la matière. Le but
+            de ce site n'est évidemment pas d'être utilisé durant les examens, mais bien d'encourager l'étude et la
+            vérification des réponses à travers des exercices réalisés au préalable.</p>
+
+        <p>Les exemples indiqués ont été retrouvés dans le syllabus de statistique présent à HE2B - ESI - École
+            Supérieure d'Informatique en 2019 et ne prétentent pas répondre à l'immensité des cas possibles (mais une
+            bonne partie) !</p>
+
+        <p style="font-weight: bold;">Je ne suis en aucun cas responsable de l'utilisation que vous faîtes de ce site :
+            vous êtes seul responsable de vos actions. Je vous rappelle cependant que la triche dans l’enseignement
+            supérieur est fortement sanctionnable.
+        </p>
+    </div>
+
+    <!-------------------------------------
+    --------------- BINOMIAL
+    -------------------------------------->
+
+    <div class="separator">
+        <h1>Loi binomiale</h1>
+        <!-------------------------------------
+        --------------- TWO VALUES
+        -------------------------------------->
+        <h2>Calcul entre deux valeurs</h2>
+        <hr>
+        <p>Exemple : "Je lance 17 fois une pièce de monnaie truquée. La probabilité d'obtenir « face » est de 0,4.
+            Quelle est la moyenne et la variance du nombre de « pile » obtenu ?"</p>
+
+        X ~ B (n, p) où n (tentatives) = <input class="binoTwoValue" type="text" id="binoTwoValue_tentative"
+            value="17"></input>
+        et p (succès) = <input class="binoTwoValue" type="text" id="binoTwoValue_probability" value="0.4"></input>
+        <select class="binoTwoValue" id="binoTwoValue_select">
+            <option value="">On cherche P ou Q ?</option>
+            <option value="P">p (nombre de succès)</option>
+            <option value="Q">q (nombre d'échec)</option>
+        </select>
+
+        <button id="binoTwoValue">Calculer</button>
+        <div id="binoTwoValue_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- PROBABILITY
+        -------------------------------------->
+        <h2>Calcul d'une probabilité</h2>
+        <hr>
+        <p>Exemple : "En jetant 6 fois une paire de dés quelle est la probabilité d'avoir un total de 9 à 2 reprises ?"
+        </p>
+
+        X ~ B (n, p) où n (tentatives) =
+        <input class="binoProbability" type="text" id="binoProbability_tentative" value="6"></input>
+        et p (succès) = <input class="binoProbability" type="text" id="binoProbability_success" value="1/9"></input>
+        avec une recherche de P[X <select class="binoProbability" id="binoProbability_select">
+            <option value="">?</option>
+            <option value="=">=</option>
+            <option value=">=">>=</option>
+            <option value=">">></option>
+            <option value="&lt;=">&lt;=</option>
+            <option value="&lt;">&lt;</option>
+        </select><input class="binoProbability" type="text" id="binoProbability_probability" value="2"></input>]
+
+        <button id="binoProbability">Calculer</button>
+        <div id="binoProbability_rep" class="answer"></div>
+    </div>
+
+    <!-------------------------------------
+    --------------- NORMAL
+    -------------------------------------->
+    <div class="separator">
+        <h1>Loi normale</h1>
+        <!-------------------------------------
+        --------------- SEARCH IN TABLE
+        -------------------------------------->
+        <h2>Chercher dans la table</h2>
+        <hr>
+        <p>Exemple : "F(0) = ? ou F(-1) = ? ou P(Z &lt;= 1.34) = ?"</p>
+
+        F(<input type="text" class="normalSearch" id="normalSearch_value" value="0.0918"></input>) = ?
+
+        <button id="normalSearch">Calculer</button>
+        <div id="normalSearch_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- SEARCH CLOSER IN TABLE
+        -------------------------------------->
+        <h2>Chercher le plus proche dans la table</h2>
+        <hr>
+        <p>Exemple : "P(X &lt; 1200) = 0.9082 et 0.9082 se trouve en position 1.33."</p>
+
+        En quelle position est la valeur la plus proche de
+        <input type="text" class="normalCloser" id="normalCloser_value" value="0.9082"></input> ?
+
+        <button id="normalCloser">Calculer</button>
+        <div id="normalCloser_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- SIMPLE INTERVAL
+        -------------------------------------->
+        <h2>Calcul simple borne</h2>
+        <hr>
+        <p>Exemple : "Une certaine marque de pneus permet en moyenne de parcourir 60000 kilomètres avec un écart
+            type de 10000 kilomètres. On suppose la distribution normale.
+            Quelle est la probabilité qu'un pneu soit usé avant 50000 kilomètres ?"</p>
+
+        <p style="font-style: italic;">Si µ et σ sont vides, il est possible de
+            faire les calculs basiques (P[Z > -0.5], P[Z &lt; 1.35], etc).</p>
+
+        X ~ N (µ, σ) où µ = <input class="normalSimpleInterval" type="text" id="normalSimpleInterval_mu"
+            value="60000"></input>
+        , σ = <input type="text" class="normalSimpleInterval" id="normalSimpleInterval_sigma" value="10000"></input>
+        et P[X <select class="normalSimpleInterval" id="normalSimpleInterval_select">
+            <option value="">?</option>
+            <option value=">=">>=</option>
+            <option value=">">></option>
+            <option value="&lt;=">&lt;=</option>
+            <option value="&lt;">&lt;</option>
+        </select>
+        <input class="normalSimpleInterval" type="text" id="normalSimpleInterval_probability" value="50000"></input>]
+
+        <button id="normalSimpleInterval">Calculer</button>
+        <div id="normalSimpleInterval_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- DOUBLE INTERVAL
+        -------------------------------------->
+        <h2>Calcul double borne</h2>
+        <hr>
+        <p>Exemple : "La vitesse des véhicules passant sur une nationale donnée est distribuée par une normale de
+            moyenne 90 km/h et d’écart-type 16 km/h.
+            Quelle est la proportion de véhicules roulant entre 70 km/h et 102 km/h ?"</p>
+
+        <p style="font-style: italic;">Si µ et σ sont vides, il est possible de faire les calculs basiques
+            (P[70 &lt; X &lt; 102], P[-0.68 &lt; Z &lt; 1.04] etc).</p>
+
+        X ~ N (µ, σ) où µ = <input class="normalDoubleInterval" type="text" id="normalDoubleInterval_mu"
+            value="90"></input>
+        , σ = <input type="text" class="normalDoubleInterval" id="normalDoubleInterval_sigma" value="16"></input>
+        et P[<input class="normalDoubleInterval" type="text" id="normalDoubleInterval_probability_1" value="70"></input>
+        <select class="normalDoubleInterval" id="normalDoubleInterval_select">
+            <option value="">?</option>
+            <option value=">=">>=</option>
+            <option value=">">></option>
+            <option value="&lt;=">&lt;=</option>
+            <option value="&lt;">&lt;</option>
+        </select>
+        <input class="normalDoubleInterval" type="text" id="normalDoubleInterval_probability_2" value="102"></input>]
+
+        <button id="normalDoubleInterval">Calculer</button>
+        <div id="normalDoubleInterval_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- SPECIAL CALCUL
+        -------------------------------------->
+        <h2>Calculs spéciaux</h2>
+        <hr>
+        <p>Exemple : "Les bénéfices quotidiens d’un magasin suivent la loi normale de moyenne µ (exprimées en
+            euros) et d’écart-type 150 euros. Sachant que la probabilité d’avoir un bénéfice supérieur ou égal à 1200
+            euros est de 0,0918.
+            Que vaut la moyenne (tronquée à l’unité) de la distribution normale ?"</p>
+
+        X ~ N (µ, σ) où µ = <input class="normalSpecial" type="text" id="normalSpecial_mu" value=""></input>
+        , σ = <input type="text" class="normalSpecial" id="normalSpecial_sigma" value="150"></input>
+        et P[X <select class="normalSpecial" id="normalSpecial_select">
+            <option value="">?</option>
+            <option value=">=">>=</option>
+            <option value=">">></option>
+            <option value="&lt;=">&lt;=</option>
+            <option value="&lt;">&lt;</option>
+        </select>
+        <input type="text" class="normalSpecial" id="normalSpecial_value" value="1200"></input>]
+        = <input type="text" class="normalSpecial" id="normalSpecial_probability" value="0.0918"></input>
+
+        <button id="normalSpecial">Calculer</button>
+        <div id="normalSpecial_rep" class="answer"></div>
+    </div>
+
+    <!-------------------------------------
+    --------------- REGRESSION
+    -------------------------------------->
+    <div class="separator">
+        <h1>Droite de régression</h1>
+        <hr>
+        <p>Exemple : "Dans une classe, on a mesuré la taille (en cm) et le poids (en kg) de 10 élèves. L’objectif
+            est d’étudier le poids (Y) en fonction de la taille (X). Le tableau ci-dessous présente les
+            résultats obtenus."</p>
+
+        <table>
+            <tr>
+                <th>Taille</th>
+                <td>175</td>
+                <td>143</td>
+                <td>158</td>
+                <td>160</td>
+                <td>161</td>
+                <td>145</td>
+                <td>152</td>
+                <td>169</td>
+                <td>143</td>
+                <td>155</td>
+            </tr>
+            <tr>
+                <th>Poids</th>
+                <td>55</td>
+                <td>38</td>
+                <td>45</td>
+                <td>47</td>
+                <td>48</td>
+                <td>37</td>
+                <td>38</td>
+                <td>51</td>
+                <td>38</td>
+                <td>45</td>
+            </tr>
+        </table>
+
+        <br>Quels sont les valeurs du coefficient a et du coefficient b de la droite de régression linéaire
+        Y = a + bX ?</p>
+
+        Valeur de X<sub>i</sub> séparé par ";" : <textarea
+            id="regressionX">175;143;158;160;161;145;152;169;143;155</textarea>
+        Valeur de Y<sub>i</sub> séparé par ";" : <textarea id="regressionY">55;38;45;47;48;37;38;51;38;45</textarea>
+        <button id="regression">Calculer</button>
+
+        <br><br><a href="https://calculis.net/droite-regression-lineaire" target="_blank">Autre site de calcul en ligne
+            (droite de régression).</a>
+
+        <div id="regression_rep" class="answer"></div>
+    </div>
+
+    <!-------------------------------------
+    --------------- STATISTICAL INFERENCE
+    -------------------------------------->
+    <div class="separator">
+        <h1>Inférence statistique et hypothèses</h1>
+        <!-------------------------------------
+        --------------- SIGMA KNOWN
+        -------------------------------------->
+        <h2>σ connu</h2>
+        <hr>
+        <p>Exemple : "Soit une population de moyenne 200 et d’écart-type 15. Dans quels intervalles de valeurs centrées
+            sur µ la moyenne d’échantillonnage a-t-elle 95.44% de chance de se situer pour un échantillon de
+            taille 36 ?"</p>
+
+        <p style="font-style: italic">Il est possible de calculer le x̄ si celui-ci est vide.
+            <br>Exemple : "Une personne désire acquérir un magasin de jouets situé dans un
+            aérogare. A partir de données
+            calculées dans un très grand nombre de magasins comparables, elle parvient à estimer l'écart-type des
+            dépenses de clients dans ce type de magasin : σ = 120 €.
+            Quelle taille d'échantillon faut-il prendre pour estimer la dépense moyenne des clients à 40 € près avec une
+            erreur de 1% ?"</p>
+
+        x̄ = <input class="inferenceSigmaKnown" type="text" id="inferenceSigmaKnown_xbar" value="200"></input>
+        σ = <input class="inferenceSigmaKnown" type="text" id="inferenceSigmaKnown_sigma" value="15"></input>
+        pourcentage de réussite =
+        <input class="inferenceSigmaKnown" type="text" id="inferenceSigmaKnown_pourcent" value="95.44"></input>
+        taille de l'échantillon (n) =
+        <input class="inferenceSigmaKnown" type="text" id="inferenceSigmaKnown_size" value="36"></input>
+
+        <button id="inferenceSigmaKnown">Calculer</button>
+        <div id="inferenceSigmaKnown_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- SIGMA UNKNOWN BIG SIZE
+        -------------------------------------->
+        <h2>σ inconnu : grand échantillon (n >= 30)</h2>
+        <hr>
+        <p>Exemple : "Le service de répondeurs téléphoniques d'une firme veut estimer le nombre moyen d'appels reçus
+            par jour. La moyenne d'un échantillon de 50 jours est de 326 appels par jour avec s' = 48.
+            Calculez une estimation de l'écart type de la distribution d'échantillonnage ainsi que l'intervalle de
+            confiance à 90% pour le nombre moyen d’appels ?"</p>
+
+        x̄ = <input class="inferenceSigmaUnKnownLarge" type="text" id="inferenceSigmaUnKnownLarge_xbar"
+            value="326"></input>
+        <select class="inferenceSigmaUnKnownLarge" id="inferenceSigmaUnKnownLarge_select">
+            <option value="">?</option>
+            <option value="S">s</option>
+            <option value="Sp">s'</option>
+        </select>=
+        <input class="inferenceSigmaUnKnownLarge" type="text" id="inferenceSigmaUnKnownLarge_s" value="48"></input>
+        pourcentage de réussite =
+        <input class="inferenceSigmaUnKnownLarge" type="text" id="inferenceSigmaUnKnownLarge_pourcent"
+            value="90"></input>
+        taille de l'échantillon (n) =
+        <input class="inferenceSigmaUnKnownLarge" type="text" id="inferenceSigmaUnKnownLarge_size" value="50"></input>
+
+        <button id="inferenceSigmaUnKnownLarge">Calculer</button>
+        <div id="inferenceSigmaUnKnownLarge_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- SIGMA UNKNOWN LITTLE SIZE
+        -------------------------------------->
+        <h2>σ inconnu : petit échantillon (n &lt; 30)</h2>
+        <hr>
+        <p>Exemple : "La taille moyenne de 20 élèves d'une école est de 1.65 m avec un écart type de 20 cm.
+            Construisez un intervalle de confiance pour la taille moyenne de tous les élèves avec un risque d'erreur de
+            seulement 5%."</p>
+
+        x̄ = <input class="inferenceSigmaUnKnownLittle" type="text" id="inferenceSigmaUnKnownLittle_xbar"
+            value="1.65"></input>
+        <select class="inferenceSigmaUnKnownLittle" id="inferenceSigmaUnKnownLittle_select">
+            <option value="">?</option>
+            <option value="S">s</option>
+            <option value="Sp">s'</option>
+        </select>=
+        <input class="inferenceSigmaUnKnownLittle" type="text" id="inferenceSigmaUnKnownLittle_s" value="0.2"></input>
+        pourcentage de réussite =
+        <input class="inferenceSigmaUnKnownLittle" type="text" id="inferenceSigmaUnKnownLittle_pourcent"
+            value="95"></input>
+        taille de l'échantillon (n) =
+        <input class="inferenceSigmaUnKnownLittle" type="text" id="inferenceSigmaUnKnownLittle_size" value="20"></input>
+
+        <button id="inferenceSigmaUnKnownLittle">Calculer</button>
+        <div id="inferenceSigmaUnKnownLittle_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- HYPOTHESES
+        -------------------------------------->
+        <h2>Hypothèses</h2>
+        <hr>
+        <p>Il suffit de réutiliser les 3 possibilités ci-dessus après avoir identifié ce qui était demandé et de
+            regarder quelle réponse correspond.</p>
+
+        <p>Exemple : "On désire tester l’hypothèse selon laquelle le poids moyen des individus d’une population
+            vaut 65 kg. Le poids des individus dans cette population est distribué selon une loi normale,
+            d’écart-type 4 kg. On prélève un échantillon d’effectif 36. Quelles sont les valeurs de la
+            moyenne observée x¯ qui conduisent au rejet de cette hypothèse (au niveau de probabilité
+            0,05) ?"</p>
+
+        <p>Il faut utiliser la loi Normale avec Sigma connu avec les configurations suivantes :</p>
+
+        <ul>
+            <li>x̄ = 65</li>
+            <li>σ = 4</li>
+            <li>Pourcentage de réussite = 95</li>
+            <li>Taille de l'échantillon (n) = 36</li>
+        </ul>
+
+        <p>Ce qui donne IC : [63.693333333333335 ; 66.30666666666667] et donc aucune réponse ne correspond.</p>
+    </div>
+
+    <!-------------------------------------
+    --------------- IMAGE PROCESSING
+    -------------------------------------->
+    <div class="separator">
+        <h1>Traitement d'image</h1>
+        <!-------------------------------------
+        --------------- STRETCHING HISTOGRAM
+        -------------------------------------->
+        <h2>Etirement</h2>
+        <hr>
+        <p>Permet d'obtenir l'histogramme étirement sur le nombre de bits indiqués.</p>
+
+        Valeur du tableau de gauche à droite séparé par ";" :
+        <textarea id="processingStretching_values" style="width: 200px">2;1;100;10;1;2;30;2;10</textarea>
+        Valeur de l'exposant (2^8 = 0-255) :
+        <input class="processingStretching" type="text" id="processingStretching_exponent" value="8"></input>
+
+        <button id="processingStretching">Calculer</button>
+        <div id="processingStretching_rep" class="answer"></div>
+
+        <!-------------------------------------
+        --------------- EQUALIZE HISTOGRAM
+        -------------------------------------->
+        <h2>Egaliser</h2>
+        <hr>
+        <p>Permet d'obtenir l'histogramme cumulé égalisé sur le nombre de bits indiqués.</p>
+
+        Valeur du tableau de gauche à droite séparé par ";" :
+        <textarea id="processingEqualize_values" style="width: 200px">2;1;100;10;1;2;30;2;10</textarea>
+        Valeur de l'exposant (2^8 = 0-255) :
+        <input class="processingEqualize" type="text" id="processingEqualize_exponent" value="8"></input>
+
+        <button id="processingEqualize">Calculer</button>
+        <div id="processingEqualize_rep" class="answer"></div>
+    </div>
+
+    <script>
+        removeIntro();
+        $(document).ready(() => {
+            exec("binoTwoValue", binoTwoValue);
+            exec("binoProbability", binoProbability);
+            exec("normalSearch", normalSearch);
+            exec("normalCloser", normalCloser);
+            exec("normalSimpleInterval", normalSimpleInterval);
+            exec("normalDoubleInterval", normalDoubleInterval);
+            exec("normalSpecial", normalSpecial);
+            exec("regression", regression);
+            exec("inferenceSigmaKnown", inferenceSigmaKnown);
+            exec("inferenceSigmaUnKnownLarge", inferenceSigmaUnKnownLarge);
+            exec("inferenceSigmaUnKnownLittle", inferenceSigmaUnKnownLittle);
+            exec("processingStretching", processingStretching);
+            exec("processingEqualize", processingEqualize);
+        });
+    </script>
+</body>
+
+</html>

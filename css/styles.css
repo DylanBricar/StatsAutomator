@@ -1,0 +1,169 @@
+/* -------------------------------------
+   --------------- GLOBAL
+   ------------------------------------- */
+
+* {
+    outline: none;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 30px 0;
+    margin-top: 70px;
+    color: #3c494e;
+    text-align: justify;
+    background-color: #f2fbff;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+h1 {
+    border: 1px solid #69a9e4;
+    background: #c7efff;
+    padding: 4px 10px;
+    position: relative;
+    top: -30px;
+    margin-bottom: -40px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+hr {
+    border: 1px solid #a2cbf1;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* -------------------------------------
+   --------------- CONTENT
+   ------------------------------------- */
+
+.separator {
+    width: 80%;
+    background-color: #c7efff;
+    margin: 20px auto;
+    margin-bottom: 50px;
+    border: 1px #69a9e4 solid;
+    box-shadow: 1px 1px 3px #69a9e4;
+    padding: 10px;
+}
+
+.separator.intro {
+    background-color: #fff0c7;
+    border: 1px #bbb8ad solid;
+    box-shadow: 1px 1px 3px #e8e2d1;
+}
+
+h1.intro {
+    border: 1px solid #bbb8ad;
+    background: #fff0c7;
+}
+
+hr.intro {
+    border: 1px solid #bbb8ad;
+}
+
+.answer {
+    font-family: monospace;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #8fa9b3;
+    background-color: #addaec;
+}
+
+.answer p {
+    margin: 2px;
+}
+
+#removeIntro {
+    font-size: 13px;
+    position: relative;
+    background: #ffbaba;
+    bottom: 6px;
+    cursor: pointer;
+    border-radius: 2px;
+    color: #866464;
+    padding: 10px;
+}
+
+/* -------------------------------------
+   --------------- TABLE
+   ------------------------------------- */
+
+table {
+    border-collapse: collapse;
+    margin: 10px;
+}
+
+table, th, td {
+    border: 2px solid #69a9e4;
+    padding: 8px;
+    text-align: center;
+}
+
+table, .masterBox {
+    display: inline-block;
+}
+
+.masterBox {
+    vertical-align: top;
+    padding: 10px;
+}
+
+th {
+    background-color: #c6e4ff;
+}
+
+/* -------------------------------------
+   --------------- FORMS
+   ------------------------------------- */
+
+input, button, select {
+    border: 1px solid #9c9c9c;
+    transition: background .2s;
+    font-size: 12px;
+    padding: 3px;
+    width: 100px;
+}
+
+button:hover {
+    background: #84ffbb;
+    transition: background .2s;
+    cursor: pointer;
+}
+
+button:active {
+    background: #82eac4;
+}
+
+#binoTwoValue_select, #binoProbability_select, #normalSimpleInterval_select, #normalSpecial_select, #normalDoubleInterval_select, #inferenceSigmaUnKnownLarge_select, #inferenceSigmaUnKnownLittle_select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: white;
+    border-radius: 0;
+    cursor: pointer;
+    width: 30px;
+    padding-left: 5px;
+    margin-right: 8px;
+}
+
+#binoTwoValue_select {
+    width: 140px;
+    padding-left: 10px;
+}
+
+textarea {
+    width: 280px;
+    height: 100px;
+    padding: 2px 3px;
+    resize: none;
+    font-size: 12px;
+    vertical-align: text-top;
+}
