@@ -5,6 +5,25 @@ Les exemples indiqués ont été retrouvés dans le syllabus de statistique pré
 
 Je ne suis en aucun cas responsable de l'utilisation que vous faîtes de ce site : vous êtes seul responsable de vos actions. Je vous rappelle cependant que la triche dans l’enseignement supérieur est fortement sanctionnable.
 
+```
+└── Stats
+    ├── css
+    │   └── styles.css
+    ├── img
+    │   └── favicon.ico
+    ├── index.html
+    ├── js
+    │   ├── binomial.js
+    │   ├── const.js
+    │   ├── inference.js
+    │   ├── normal.js
+    │   ├── processing.js
+    │   ├── regression.js
+    │   └── utils.js
+    ├── libs
+        └── jquery.min.js
+```
+
 ### Traîte des cas :
 - Loi binomiale
 - Loi normale
@@ -12,3 +31,6 @@ Je ne suis en aucun cas responsable de l'utilisation que vous faîtes de ce site
 - Inférence statistique
 - Hypothèses
 - Traitement d'image
+
+### Exemple du site :
+![Exemple du site](https://nsa40.casimages.com/img/2020/06/16/200616012147805274.png "Exemple du site")
