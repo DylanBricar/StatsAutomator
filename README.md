@@ -44,4 +44,4 @@ Les exemples présents proviennent du syllabus de statistique de la HE2B - ESI (
 
 ## 🖼️ Aperçu du site
 
-![Exemple du site](https://github.com/DylanBricar/StatsAutomator/tree/master/img/screens/website.png "Exemple du site")
+![Exemple du site](https://github.com/DylanBricar/StatsAutomator/blob/master/img/screens/website.png "Exemple du site")
