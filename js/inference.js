@@ -31,11 +31,11 @@ function inferenceSigmaKnown() {
             N = Math.pow((2 * Z * sigma) / (2 * xbar), 2);
             $("#inferenceSigmaKnown_rep")
                 .append($("<p>").text("N = [(2 * Z * σ)/2*x̄]^2 = [(2 * " + Z + " * " + sigma + ") / (2*" + xbar + ")]^2 = " + N));
-        };
+        }
     } else {
         $("#inferenceSigmaKnown_rep").append($("<p>").text("Merci de remplir tous les champs."))
-    };
-};
+    }
+}
 
 /**
  * Computes the inferences when we unknow Sigma and the size is big.
@@ -64,8 +64,8 @@ function inferenceSigmaUnKnownLarge() {
     } else {
         $("#inferenceSigmaUnKnownLarge_rep")
             .append($("<p>").text("Merci de remplir tous les champs."))
-    };
-};
+    }
+}
 
 /**
  * Computes the inferences when we unknow Sigma and the size is little.
@@ -117,6 +117,6 @@ function inferenceSigmaUnKnownLittle() {
     } else {
         $("#inferenceSigmaUnKnownLittle_rep")
             .append($("<p>").text("Merci de remplir tous les champs."))
-    };
-};
+    }
+}
 

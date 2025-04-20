@@ -1,15 +1,15 @@
 /**
- * Searchs in the table the value for the normal law.
+ * Searches in the table the value for the normal law.
  */
 function normalSearch() {
     const value = eval($("#normalSearch_value").val());
     $("#normalSearch_rep")
         .empty()
         .append($("<p>").text("F(" + value + ") = " + changeF(value)));
-};
+}
 
 /**
- * Searchs in the table the closer value for the normal law.
+ * Searches in the table the closer value for the normal law.
  */
 function normalCloser() {
     const value = eval($("#normalCloser_value").val());
@@ -17,10 +17,10 @@ function normalCloser() {
         .empty()
         .append($("<p>").text("La valeur la plus proche de " + value + " est "
             + closer(value) + " et se trouve à la position " + findIndex(closer(value))));
-};
+}
 
 /**
- * Searchs the normal law in a simple interval.
+ * Searches the normal law in a simple interval.
  */
 function normalSimpleInterval() {
     const selectedChoose = $("#normalSimpleInterval_select").children("option:selected").val();
@@ -44,7 +44,8 @@ function normalSimpleInterval() {
                 } catch {
                     $("#normalSimpleInterval_rep")
                         .append($("<p>").text("F(" + (value - mu) / sigma + ") n'a pas pu être calculé automatiquement."));
-                };
+                }
+                ;
 
                 // Calculs with > and >= symbolcs
             } else if (selectedChoose === ">" || selectedChoose === ">=") {
@@ -58,8 +59,10 @@ function normalSimpleInterval() {
                 } catch {
                     $("#normalSimpleInterval_rep")
                         .append($("<p>").text("1 - F(" + (value - mu) / sigma + ") n'a pas pu être calculé automatiquement."));
-                };
-            };
+                }
+                ;
+            }
+            ;
         } else {
             $("#normalSimpleInterval_rep")
                 .append($("<p>").text("µ et σ n'étant pas remplis, le simple calcul est effectué."))
@@ -73,7 +76,8 @@ function normalSimpleInterval() {
                 } catch {
                     $("#normalSimpleInterval_rep")
                         .append($("<p>").text("F(" + value + ") n'a pas pu être calculé automatiquement."));
-                };
+                }
+                ;
             } else {
                 try {
                     $("#normalSimpleInterval_rep")
@@ -81,16 +85,16 @@ function normalSimpleInterval() {
                 } catch {
                     $("#normalSimpleInterval_rep")
                         .append($("<p>").text("1 - F(" + value + ") n'a pas pu être calculé automatiquement."));
-                };
-            };
-        };
+                }
+            }
+        }
     } else {
         $("#normalSimpleInterval_rep").append($("<p>").text("Merci de remplir tous les champs."));
-    };
-};
+    }
+}
 
 /**
- * Searchs the normal law in a double interval.
+ * Searches the normal law in a double interval.
  */
 function normalDoubleInterval() {
     const selectedChoose = $("#normalDoubleInterval_select").children("option:selected").val();
@@ -120,7 +124,7 @@ function normalDoubleInterval() {
                         + "  X " + selectedChoose + " " + proba2_cal + "]"))
                     .append($("<p>").text("1 - [F(" + proba2_cal + ") - F(" + proba1_cal + ")] = 1 - ("
                         + changeF(proba2_cal) + " - " + changeF(proba1_cal) + ") = " + (1 - (changeF(proba2_cal) - changeF(proba1_cal)))));
-            };
+            }
         } else {
             $("#normalDoubleInterval_rep")
                 .append($("<p>").text("µ et σ n'étant pas remplis, le simple calcul est effectué."))
@@ -131,27 +135,27 @@ function normalDoubleInterval() {
                 try {
                     $("#normalDoubleInterval_rep").append($("<p>")
                         .text("F(" + proba2 + ") - F(" + proba1 + ") = " + (changeF(proba2) - changeF(proba1))));
-                } catch{
+                } catch {
                     $("#normalDoubleInterval_rep").append($("<p>")
                         .text("F(" + proba2 + ") - F(" + proba1 + ") n'a pas pu être calculé automatiquement."));
-                };
+                }
             } else {
                 try {
                     $("#normalDoubleInterval_rep").append($("<p>")
                         .text("1 - (F(" + proba2 + ") - F(" + proba1 + ")) = " + (1 - (changeF(proba2) - changeF(proba1)))));
-                } catch{
+                } catch {
                     $("#normalDoubleInterval_rep").append($("<p>")
                         .text("1 - (F(" + proba2 + ") - F(" + proba1 + ")) n'a pas pu être calculé automatiquement."));
-                };
-            };
-        };
+                }
+            }
+        }
     } else {
         $("#normalDoubleInterval_rep").append($("<p>").text("Merci de remplir tous les champs."));
-    };
-};
+    }
+}
 
 /**
- * Calculs the normal law when mu is unknow.
+ * Calculs the normal law when mu is unknown.
  */
 function normalSpecial() {
     const mu = $("#normalSpecial_mu").val() === "" ? "µ" : eval($("#normalSpecial_mu").val());
@@ -170,7 +174,7 @@ function normalSpecial() {
         if (ope.indexOf("<")) {
             $("#normalSpecial_rep").append($("<p>").text("P(X < " + value + ") = 1 - " + prop + " = " + (1 - prop)));
             prop = 1 - prop;
-        };
+        }
 
         const index = findIndex(closer(prop));
         $("#normalSpecial_rep")
@@ -180,5 +184,5 @@ function normalSpecial() {
                 .text("Donc µ = " + value + " − " + sigma + " * " + index + " = " + (value - sigma * index) + " (tronquer si nécéssaire)."));
     } else {
         $("#normalSpecial_rep").append($("<p>").text("Merci de choisir l'opérateur."));
-    };
-};
+    }
+}

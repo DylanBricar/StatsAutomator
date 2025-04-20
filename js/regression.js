@@ -30,7 +30,7 @@ function regression() {
             .append($("<td>").text(Math.pow(reg_x[i], 2)))
             .append($("<td>").text(Math.pow(reg_y[i], 2)))
         );
-    };
+    }
 
     $("#regression_rep table").append($("<tr>")
         .append($("<th>").text(sum[0]))
@@ -56,4 +56,4 @@ function regression() {
         .append($("<p>").text("b = " + sigmaXY + " / " + sigmaX2 + " = " + b))
         .append($("<p>").text("a = " + muY + " - " + b + "*" + muX + " = " + a))
         .append($("<p>").css("margin-top", '10px').text("Y = bX + a : Y = " + b + "x + " + a));
-};
+}

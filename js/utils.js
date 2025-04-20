@@ -3,12 +3,23 @@
  * @param {Number} nbr the given number
  */
 function fact(nbr) {
-    var i, nbr, f = 1;
-    for (i = 1; i <= nbr; i++) {
+    // Use memoization to avoid recalculating factorials
+    if (!fact.cache) {
+        fact.cache = { 0: 1, 1: 1 };
+    }
+    
+    if (fact.cache[nbr] !== undefined) {
+        return fact.cache[nbr];
+    }
+    
+    let f = 1;
+    for (let i = 2; i <= nbr; i++) {
         f *= i;
-    };
+    }
+    
+    fact.cache[nbr] = f;
     return f;
-};
+}
 
 /**
  * Calculates the probability in the binomial law.
@@ -22,7 +33,7 @@ function bino_proba(N, P, K, Q) {
 };
 
 /**
- * Searchs in the table and change the value if the value is negative (1 - F(x)).
+ * Searches in the table and change the value if the value is negative (1 - F(x)).
  * @param {Number} value the given number
  */
 function changeF(value) {
@@ -30,7 +41,7 @@ function changeF(value) {
 };
 
 /**
- * Searchs in the table the value for the given F number.
+ * Searches in the table the value for the given F number.
  * @param {Number} value the given number
  */
 function searchF(value) {
@@ -40,69 +51,69 @@ function searchF(value) {
     return tab_repartition[x][y];
 };
 
+// Cache for all values in the table
+let tabValuesCache;
+
 /**
- * Searchs the table for the number closest to that given.
+ * Searches the table for the number closest to that given.
  * @param {Number} value the given value
  */
 function closer(value) {
-    let array = [];
-
-    $.each(tab_repartition, (key, value) => {
-        $.each(tab_repartition[key], (inkey, invalue) => {
-            array.push(invalue)
+    // Initialize cache if needed
+    if (!tabValuesCache) {
+        tabValuesCache = [];
+        $.each(tab_repartition, (key, value) => {
+            $.each(tab_repartition[key], (inkey, invalue) => {
+                tabValuesCache.push(invalue);
+            });
         });
-    });
+    }
 
-    let closest = array.reduce((prev, curr) => {
+    return tabValuesCache.reduce((prev, curr) => {
         return (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
     });
+}
 
-    return closest;
-};
+// Cache pour le mapping des valeurs aux indices
+let valueToIndexCache;
 
 /**
  * Finds the index from the number given in the table.
  * @param {Number} valueDon the given value
  */
 function findIndex(valueDon) {
-    let index = 0;
-    $.each(tab_repartition, (key, value) => {
-        $.each(tab_repartition[key], (inkey, invalue) => {
-            if (invalue === valueDon) {
-                index = key + inkey;
-            };
+    // Initialisation du cache si nécessaire
+    if (!valueToIndexCache) {
+        valueToIndexCache = {};
+        $.each(tab_repartition, (key, value) => {
+            $.each(tab_repartition[key], (inkey, invalue) => {
+                valueToIndexCache[invalue] = key + inkey;
+            });
         });
-    });
-    return index;
-};
+    }
+    
+    // Recherche dans le cache
+    return valueToIndexCache[valueDon] || "";
+}
 
 function replaced(newArray, value) {
-    let valeur = -1;
-    let i = 0;
-
-    while (valeur == -1 || i < newArray.length) {
-        array = newArray[i].split(";");
+    // Utiliser une approche plus directe pour trouver la valeur
+    for (let i = 0; i < newArray.length; i++) {
+        const array = newArray[i].split(";");
         if (value == array[0]) {
-            valeur = array[1];
+            return Math.round(array[1]);
         }
-        i++;
-    };
-    return Math.round(valeur);
-};
+    }
+    return -1;
+}
 
 /**
  * Removes duplicates values in the given array.
  * @param {Number} array the given array
  */
 function removeDuplicates(array) {
-    let unique = {};
-    array.forEach((i) => {
-        if (!unique[i]) {
-            unique[i] = true;
-        };
-    });
-    return Object.keys(unique);
-};
+    return [...new Set(array)];
+}
 
 /**
  * Makes an object with the string of all probabilitues and calculs them.

@@ -19,8 +19,8 @@ function binoTwoValue() {
         $("#binoTwoValue_rep")
             .empty()
             .append($("<p>").text("Merci de choisir P ou Q comme résultat cherché."));
-    };
-};
+    }
+}
 
 /**
  * Calculates a probability with a binomial distribution and displays the results.
@@ -32,6 +32,7 @@ function binoProbability() {
     const Q = 1 - P;
     const K = eval($("#binoProbability_probability").val());
 
+    let probabilities;
     if (N && P && K && selectedChoose) {
         $("#binoProbability_rep").empty();
 
@@ -81,7 +82,7 @@ function binoProbability() {
 
             probabilities = addProbability(K, N, P, Q);
             $("#binoProbability_rep").append($("<p>").text("P[X <= " + K + "] = " + probabilities.string + " = " + probabilities.value));
-        };
+        }
 
         $("#binoProbability_rep")
             .append($("<p>").css('margin-top', '12px').text("μ : E(x) = N*P = " + N + "*" + P + " = " + N * P))
@@ -91,5 +92,5 @@ function binoProbability() {
         $("#binoProbability_rep")
             .empty()
             .append($("<p>").text("Merci de remplir tous les champs."));
-    };
-};
+    }
+}

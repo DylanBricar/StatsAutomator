@@ -8,8 +8,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 30px 0;
-    margin-top: 70px;
+    margin: 70px 0 30px;
     color: #3c494e;
     text-align: justify;
     background-color: #f2fbff;
@@ -47,8 +46,7 @@ a {
 .separator {
     width: 80%;
     background-color: #c7efff;
-    margin: 20px auto;
-    margin-bottom: 50px;
+    margin: 20px auto 50px;
     border: 1px #69a9e4 solid;
     box-shadow: 1px 1px 3px #69a9e4;
     padding: 10px;
@@ -142,7 +140,8 @@ button:active {
     background: #82eac4;
 }
 
-#binoTwoValue_select, #binoProbability_select, #normalSimpleInterval_select, #normalSpecial_select, #normalDoubleInterval_select, #inferenceSigmaUnKnownLarge_select, #inferenceSigmaUnKnownLittle_select {
+#binoTwoValue_select, #binoProbability_select, #normalSimpleInterval_select, #normalSpecial_select,
+#normalDoubleInterval_select, #inferenceSigmaUnKnownLarge_select, #inferenceSigmaUnKnownLittle_select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
